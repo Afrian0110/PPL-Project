@@ -7,9 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Sistem Informasi Pengmbalian Barang Hilang Unib</h1>
-        <p>This is the landing page for our PPL Project.</p>
-    </div>
+<H1>Sistem Informasi Peminjaman Gedung dan Ruangan Universitas Bengkulu</H1>
+
+<table>
+    <thead>
+        <tr>judul</tr>
+        <tr>penulis</tr>
+        <tr>penerbit</tr>
+        <tr>sinopsis</tr>
+        <tr>tahun</tr>
+        <tr>stok</tr>
+        <tr>status</tr>
+    </thead>
+    <tbody>
+        @foreach ($data as $dt)
+        <tr>
+            <td>{{$dt->judul}}</td>
+            <td>{{$dt->penulis}}</td>
+            <td>{{$dt->penerbit}}</td>
+            <td>{{$dt->sinopsis}}</td>
+            <td>{{$dt->tahun}}</td>
+            <td>{{$dt->stok}}</td>
+            <td>{{$dt->status}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 </body>
 </html>
