@@ -36,3 +36,7 @@ Route::get('/peminjaman',[PeminjamanController::class, 'index'])->name("peminjam
 Route::get('/create',[PeminjamanController::class, 'create'])->name('create');
 
 Route::post('/store',[PeminjamanController::class, 'store'])->name('store');
+
+Route::get('/peminjaman/{peminjaman}',[PeminjamanController::class, 'edit'])->name('edit');
+Route::put('/peminjaman/{peminjaman}',[PeminjamanController::class, 'update'])->name('update');
+Route::delete('/peminjaman/{peminjaman}',[PeminjamanController::class, 'destroy'])->name('destroy');

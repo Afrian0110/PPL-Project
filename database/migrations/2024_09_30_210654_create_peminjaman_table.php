@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,12 +14,13 @@ return new class extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->string('Nama_Peminjam',50);
+            // $table->string('Nama_Peminjam',50);
             $table->enum("Peminjaman", ["Gedung", "Ruangan"]);
             $table->date('Tanggal_Peminjaman');
             $table->integer('durasi_peminjaman');
             $table->enum('status_peminjaman', ['Diajukan', 'Disetujui', 'Ditolak']);
             $table->boolean('terverifikasi') ->default(false);
+            $table->foreignIdFor(\App\Models\Peminjam::class, 'peminjam_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

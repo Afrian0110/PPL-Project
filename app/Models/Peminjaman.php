@@ -15,6 +15,13 @@ class Peminjaman extends Model
         'Tanggal_Peminjaman',
         'durasi_peminjaman',
         'status_peminjaman',
-        'terverifikasi'
+        'terverifikasi',
+        'peminjam_id',
         ];
+
+        public function peminjam()
+        {
+            return $this->belongsTo(Peminjam::class);
+        }
+
 }

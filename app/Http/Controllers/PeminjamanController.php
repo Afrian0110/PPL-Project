@@ -58,24 +58,40 @@ class PeminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Peminjaman $peminjaman)
     {
-        //
+        return view('edit',['peminjaman' => $peminjaman]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Peminjaman $peminjaman)
     {
-        //
+        $validatedData = $request->validate([
+            'Nama_Peminjam' => 'required',
+            'Peminjaman' => 'required',
+            'Tanggal_Peminjaman' => 'required',
+            'durasi_peminjaman' => 'required',
+            'status_peminjaman' => 'required',
+            'terverifikasi'=>'boolean'
+        ]);
+
+        $validatedData['terverifikasi'] = $request->has('terverifikasi') ? 1 : 0;
+
+        // Update data peminjaman
+        $peminjaman->update($validatedData);
+        if ($peminjaman) {
+            return redirect('/peminjaman')->with('success', 'Peminjaman Gedung atau Ruangan berhasil diperbarui');
+        } 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Peminjaman $peminjaman)
     {
-        //
+        $peminjaman->delete();
+        return redirect('/peminjaman')->with('success', 'Peminjaman Gedung atau Ruangan berhasil dihapus');
     }
 }

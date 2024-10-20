@@ -97,46 +97,65 @@
     </style>
 </head>
 <body>
-    <form action="{{route('store')}}" method="post">
+    <form action="{{ route('update', $peminjaman->id) }}" method="POST">
+        @method('PUT')
         @csrf
 
         <h1>Form Peminjaman</h1>
-
+        
         <div class="form-group">
             <label for="Nama_Peminjam">Nama Peminjam:</label>
-            <input type="text" name="Nama_Peminjam" id="Nama_Peminjam" placeholder="Nama Peminjam">
+            <input type="text" name="Nama_Peminjam" id="Nama_Peminjam" value="{{ old('Nama_Peminjam', $peminjaman->Nama_Peminjam) }}">
+            @error('Nama_Peminjam')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="Peminjaman">Peminjaman:</label>
             <select name="Peminjaman" id="Peminjaman">
-                <option value="Gedung">Gedung</option>
-                <option value="Ruangan">Ruangan</option>
+                <option value="Gedung" {{ old('Peminjaman', $peminjaman->Peminjaman) == 'Gedung' ? 'selected' : '' }}>Gedung</option>
+                <option value="Ruangan" {{ old('Peminjaman', $peminjaman->Peminjaman) == 'Ruangan' ? 'selected' : '' }}>Ruangan</option>
             </select>
+            @error('Peminjaman')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="Tanggal_Peminjaman">Tanggal Peminjaman:</label>
-            <input type="date" name="Tanggal_Peminjaman" id="Tanggal_Peminjaman">
+            <input type="date" name="Tanggal_Peminjaman" id="Tanggal_Peminjaman" value="{{ old('Tanggal_Peminjaman', $peminjaman->Tanggal_Peminjaman) }}">
+            @error('Tanggal_Peminjaman')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="durasi_peminjaman">Durasi Peminjaman (hari):</label>
-            <input type="number" name="durasi_peminjaman" id="durasi_peminjaman" placeholder="Durasi Peminjaman">
+            <input type="number" name="durasi_peminjaman" id="durasi_peminjaman" value="{{ old('durasi_peminjaman', $peminjaman->durasi_peminjaman) }}">
+            @error('durasi_peminjaman')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">
             <label for="status_peminjaman">Status Peminjaman:</label>
             <select name="status_peminjaman" id="status_peminjaman">
-                <option value="Diajukan">Diajukan</option>
-                <option value="Disetujui">Disetujui</option>
-                <option value="Ditolak">Ditolak</option>
+                <option value="Diajukan" {{ old('status_peminjaman', $peminjaman->status_peminjaman) == 'Diajukan' ? 'selected' : '' }}>Diajukan</option>
+                <option value="Disetujui" {{ old('status_peminjaman', $peminjaman->status_peminjaman) == 'Disetujui' ? 'selected' : '' }}>Disetujui</option>
+                <option value="Ditolak" {{ old('status_peminjaman', $peminjaman->status_peminjaman) == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
             </select>
+            @error('status_peminjaman')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="checkbox-group">
-            <input type="checkbox" id="terverifikasi" name="terverifikasi" value="1">
+            <input type="checkbox" id="terverifikasi" name="terverifikasi" value="1" {{ old('terverifikasi', $peminjaman->terverifikasi) ? 'checked' : '' }}>
             <label for="terverifikasi">Terverifikasi</label>
+            @error('terverifikasi')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-container">
